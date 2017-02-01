@@ -12,14 +12,14 @@ abstract class BaseAction extends Action
 {
 
     /**
-     * This variable should be the component name of asasmoyo\yii2saml\Saml.
+     * This variable should be the component name of pixelycia\yii2saml\Saml.
      * @var string
      */
     public $samlInstanceName = 'saml';
 
     /**
-     * This variable hold the instance of asasmoyo\yii2saml\Saml.
-     * @var \asasmoyo\yii2saml\Saml
+     * This variable hold the instance of pixelycia\yii2saml\Saml.
+     * @var \pixelycia\yii2saml\Saml
      */
     protected $samlInstance;
 
