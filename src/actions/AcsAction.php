@@ -59,7 +59,7 @@ class AcsAction extends BaseAction
             throw new InvalidConfigException($message);
         }
 
-        $response = call_user_func($this->successCallback, $this->samlInstance->getAttributes());
+        $response = call_user_func($this->successCallback, $this->samlInstance->getAttributes(), $this->samlInstance->getNameId());
         if ($response instanceof Response) {
             return $response;
         }
