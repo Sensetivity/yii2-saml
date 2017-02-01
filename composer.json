@@ -1,5 +1,5 @@
 {
-    "name": "asasmoyo/yii2-saml",
+    "name": "pixelycia/yii2-saml",
     "description": "Connect Yii 2 application to a Saml Identity Provider for Single Sign On",
     "type": "yii2-extension",
     "keywords": [
@@ -11,8 +11,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Arba Sasmoyo",
-            "email": "asasmoyo@student.uns.ac.id"
+            "name": "Erick Pavlov",
+            "email": "pixelycia@gmail.com"
         }
     ],
     "minimum-stability": "dev",
