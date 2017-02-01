@@ -61,6 +61,14 @@ class Saml extends Object
     {
         return $this->instance->getAttributes();
     }
+    
+    /**
+     * Call the getNameId method on OneLogin_Saml2_Auth.
+     */
+    public function getNameId()
+    {
+        return $this->instance->getNameId();
+    }
 
     /**
      * Call the getAttribute method on OneLogin_Saml2_Auth.
