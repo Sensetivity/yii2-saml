@@ -1,6 +1,6 @@
 <?php
 
-namespace pixelycia\yii2saml;
+namespace Sensetivity\yii2saml;
 
 use Yii;
 use yii\base\Object;

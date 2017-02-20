@@ -1,10 +1,10 @@
 <?php
 
-namespace pixelycia\yii2saml\actions;
+namespace Sensetivity\yii2saml\actions;
 
 /**
  * This action initiate logout process on Identity Provider.
- * @package pixelycia\yii2saml\actions
+ * @package Sensetivity\yii2saml\actions
  */
 class LogoutAction extends BaseAction
 {

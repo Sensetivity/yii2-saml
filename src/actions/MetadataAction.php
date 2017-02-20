@@ -1,6 +1,6 @@
 <?php
 
-namespace pixelycia\yii2saml\actions;
+namespace Sensetivity\yii2saml\actions;
 
 use Yii;
 use yii\web\Response;
@@ -17,7 +17,7 @@ class MetadataAction extends BaseAction
      */
     public function run()
     {
-        \Yii::$app->response->format = Response::FORMAT_XML;
+        header('Content-Type: text/xml; charset=utf-8');
         echo $this->samlInstance->getMetadata();
     }
 

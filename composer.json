@@ -1,5 +1,5 @@
 {
-    "name": "pixelycia/yii2-saml",
+    "name": "sensetivity/yii2-saml",
     "description": "Connect Yii 2 application to a Saml Identity Provider for Single Sign On",
     "type": "yii2-extension",
     "keywords": [
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "pixelycia\\yii2saml\\": "src/"
+            "Sensetivity\\yii2saml\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "pixelycia\\yii2saml\\tests\\": "tests/"
+            "Sensetivity\\yii2saml\\tests\\": "tests/"
         }
     }
 }

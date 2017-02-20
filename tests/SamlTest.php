@@ -1,8 +1,8 @@
 <?php
 
-namespace pixelycia\yii2saml\tests;
+namespace sensetivity\yii2saml\tests;
 
-use pixelycia\yii2saml\Saml;
+use sensetivity\yii2saml\Saml;
 
 class SamlTest extends \PHPUnit_Framework_TestCase
 {

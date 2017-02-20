@@ -13,13 +13,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist pixelycia/yii2-saml "*"
+php composer.phar require --prefer-dist sensetivity/yii2-saml "*"
 ```
 
 or add
 
 ```
-"pixelycia/yii2-saml": "*"
+"sensetivity/yii2-saml": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -27,12 +27,12 @@ to the require section of your `composer.json` file.
 Configuration
 -------------
 
-Register ``pixelycia\yii2saml\Saml`` to your components in ``config/web.php``.
+Register ``sensetivity\yii2saml\Saml`` to your components in ``config/web.php``.
 
 ```php
 'components' => [
     'saml' => [
-        'class' => 'pixelycia\yii2saml\Saml',
+        'class' => 'sensetivity\yii2saml\Saml',
         'configFileName' => '@app/config/saml.php', // OneLogin_Saml config file (Optional)
     ]
 ]
@@ -97,7 +97,7 @@ This extension provides 4 actions:
         public function actions() {
             return [
                 'login' => [
-                    'class' => 'pixelycia\yii2saml\actions\LoginAction'
+                    'class' => 'sensetivity\yii2saml\actions\LoginAction'
                 ]
             ];
         }
@@ -130,7 +130,14 @@ This extension provides 4 actions:
             return [
                 ...
                 'acs' => [
-                    'class' => 'pixelycia\yii2saml\actions\AcsAction',
+                    'class' => 'sensetivity\yii2saml\actions\AcsAction',
+                    'attributeMapping' => [
+                        'http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname' => 'username',
+                        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname' => 'first_name',
+                        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname' => 'last_name',
+                        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress' => 'email',
+                        'http://schemas.xmlsoap.org/claims/Group' => 'groups',
+                    ],
                     'successCallback' => [$this, 'callback'],
                     'successUrl' => Url::to('site/welcome'),
                 ]
@@ -138,9 +145,11 @@ This extension provides 4 actions:
         }
 
         /**
-         * @param array $attributes attributes sent by Identity Provider.
+         * @param array $attributes mapped attributes sent by Identity Provider.
+         * @param string $nameId nameId attribute sent by Identity Provider.
+         * @param array $rawAttributes sent by Identity Provider.
          */
-        public function callback($attributes) {
+        public function callback($attributes, $nameId, $rawAttributes) {
             // do something
         }
     }
@@ -159,7 +168,7 @@ This extension provides 4 actions:
             return [
                 ...
                 'metadata' => [
-                    'class' => 'pixelycia\yii2saml\actions\MetadataAction'
+                    'class' => 'sensetivity\yii2saml\actions\MetadataAction'
                 ]
             ];
         }
@@ -176,7 +185,7 @@ This extension provides 4 actions:
             return [
                 ...
                 'logout' => [
-                    'class' => 'pixelycia\yii2saml\actions\LogoutAction',
+                    'class' => 'sensetivity\yii2saml\actions\LogoutAction',
                     'returnTo' => Url::to('site/bye'),
                 ]
             ];
@@ -196,7 +205,7 @@ This extension provides 4 actions:
             return [
                 ...
                 'sls' => [
-                    'class' => 'pixelycia\yii2saml\actions\SlsAction',
+                    'class' => 'sensetivity\yii2saml\actions\SlsAction',
                     'successUrl' => Url::to('site/bye'),
                 ]
             ]

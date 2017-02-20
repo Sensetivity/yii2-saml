@@ -1,6 +1,6 @@
 <?php
 
-namespace pixelycia\yii2saml\actions;
+namespace Sensetivity\yii2saml\actions;
 
 use Yii;
 

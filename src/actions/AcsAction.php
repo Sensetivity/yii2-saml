@@ -1,6 +1,6 @@
 <?php
 
-namespace pixelycia\yii2saml\actions;
+namespace Sensetivity\yii2saml\actions;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -48,7 +48,7 @@ class AcsAction extends BaseAction
             if ($this->samlInstance->isDebugActive()) {
                 $reason = $this->samlInstance->getLastErrorReason();
                 if (!empty($reason)) {
-                    $message .= "\n".$reason;
+                    $message .= "\n" . $reason;
                 }
             }
             throw new Exception($message);
@@ -59,12 +59,67 @@ class AcsAction extends BaseAction
             throw new InvalidConfigException($message);
         }
 
-        $response = call_user_func($this->successCallback, $this->samlInstance->getAttributes(), $this->samlInstance->getNameId());
+        $rawAttributes = $this->samlInstance->getAttributes();
+        $attributes = $this->mapAttributes($rawAttributes);
+
+        $response = call_user_func($this->successCallback, $attributes, $this->samlInstance->getNameId(), $rawAttributes);
         if ($response instanceof Response) {
             return $response;
         }
 
         return \Yii::$app->response->redirect($this->successUrl);
+    }
+
+    /**
+     * Split URL-like attribute and return last part to used it like a key.
+     * @param string $url
+     * @return string
+     */
+    public static function getAttributeKeyFromUrl($url)
+    {
+        $urlArray = explode('/', $url);
+        $attributeKey = end($urlArray);
+
+        return $attributeKey;
+    }
+
+    /**
+     * In fact it just return an array zero index value;
+     * @param array $arrayValue
+     * @return array|mixed
+     */
+    public static function getValue($arrayValue)
+    {
+        return (is_array($arrayValue) && (count($arrayValue) == 1)) ? reset($arrayValue) : $arrayValue;
+    }
+
+    /**
+     * Mapped attributes what received from Identity Provider
+     * @param array $rawAttributes
+     * @return array
+     */
+    protected function mapAttributes($rawAttributes)
+    {
+        $attributes = [];
+        if (!empty($this->attributeMapping)) {
+            foreach ($this->attributeMapping as $attributeHaystack => $attributeNeedle) {
+                if (!filter_var($attributeHaystack, FILTER_VALIDATE_URL) === false) {
+                    $attributeHaystackKey = self::getAttributeKeyFromUrl($attributeHaystack);
+                    foreach ($rawAttributes as $rawAttribute => $attributeValue) {
+                        if (strpos($rawAttribute, $attributeHaystackKey) !== false) {
+                            $attributes[$attributeNeedle] = self::getValue($attributeValue);
+                        }
+                    }
+                } elseif (isset($rawAttributes[$attributeHaystack])) {
+                    $attributes[$attributeNeedle] = self::getValue($rawAttributes[$attributeHaystack]);
+                }
+
+            }
+        } else {
+            $attributes = $rawAttributes;
+        }
+
+        return $attributes;
     }
 
 }

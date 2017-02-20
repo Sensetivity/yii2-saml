@@ -1,6 +1,6 @@
 <?php
 
-namespace pixelycia\yii2saml\actions;
+namespace Sensetivity\yii2saml\actions;
 
 use yii\base\Action;
 use Yii;
@@ -12,14 +12,14 @@ abstract class BaseAction extends Action
 {
 
     /**
-     * This variable should be the component name of pixelycia\yii2saml\Saml.
+     * This variable should be the component name of Sensetivity\yii2saml\Saml.
      * @var string
      */
     public $samlInstanceName = 'saml';
 
     /**
-     * This variable hold the instance of pixelycia\yii2saml\Saml.
-     * @var \pixelycia\yii2saml\Saml
+     * This variable hold the instance of Sensetivity\yii2saml\Saml.
+     * @var \Sensetivity\yii2saml\Saml
      */
     protected $samlInstance;
 
